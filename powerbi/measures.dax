@@ -1,0 +1,72 @@
+// ---------------------------------------------------------------------------
+// Hospital Readmission Analysis - DAX measures
+// Create each one in Power BI Desktop: Modeling > New measure, paste, Enter.
+// Put them all in fact_encounter (or a blank "_Measures" table if you prefer).
+// ---------------------------------------------------------------------------
+
+// --- Volume -----------------------------------------------------------------
+Encounters =
+COUNTROWS ( fact_encounter )
+
+Unique Patients =
+DISTINCTCOUNT ( fact_encounter[patient_nbr] )
+
+// --- Primary cohort: first encounter per patient, death/hospice excluded -----
+Cohort Patients =
+CALCULATE (
+    COUNTROWS ( fact_encounter ),
+    fact_encounter[is_index] = 1,
+    fact_encounter[excluded] = 0
+)
+
+Cohort Readmissions =
+CALCULATE (
+    SUM ( fact_encounter[readmit_30] ),
+    fact_encounter[is_index] = 1,
+    fact_encounter[excluded] = 0
+)
+
+Readmission Rate % =
+DIVIDE ( [Cohort Readmissions], [Cohort Patients] )
+// Format: Percentage, 1 decimal place
+
+Avg Length of Stay =
+CALCULATE (
+    AVERAGE ( fact_encounter[time_in_hospital] ),
+    fact_encounter[is_index] = 1,
+    fact_encounter[excluded] = 0
+)
+
+// --- 95% Wilson confidence interval, same maths as src/02_run_analysis.py -----
+Rate CI Low % =
+VAR n = [Cohort Patients]
+VAR p = DIVIDE ( [Cohort Readmissions], n )
+VAR z = 1.959964
+VAR denom = 1 + z ^ 2 / n
+VAR centre = ( p + z ^ 2 / ( 2 * n ) ) / denom
+VAR half = z * SQRT ( p * ( 1 - p ) / n + z ^ 2 / ( 4 * n ^ 2 ) ) / denom
+RETURN IF ( n > 0, centre - half )
+
+Rate CI High % =
+VAR n = [Cohort Patients]
+VAR p = DIVIDE ( [Cohort Readmissions], n )
+VAR z = 1.959964
+VAR denom = 1 + z ^ 2 / n
+VAR centre = ( p + z ^ 2 / ( 2 * n ) ) / denom
+VAR half = z * SQRT ( p * ( 1 - p ) / n + z ^ 2 / ( 4 * n ^ 2 ) ) / denom
+RETURN IF ( n > 0, centre + half )
+
+// --- Comparison to the overall rate, ignoring every slicer and visual filter --
+Overall Rate % =
+CALCULATE ( [Readmission Rate %], ALL ( fact_encounter ) )
+
+Rate vs Overall (pp) =
+( [Readmission Rate %] - [Overall Rate %] ) * 100
+// Format: Decimal number, 1 place. Positive = worse than overall.
+
+// --- Encounter-level view, to show why the unit of analysis matters ----------
+Encounter-level Rate % =
+DIVIDE (
+    CALCULATE ( SUM ( fact_encounter[readmit_30] ), fact_encounter[excluded] = 0 ),
+    CALCULATE ( COUNTROWS ( fact_encounter ), fact_encounter[excluded] = 0 )
+)
