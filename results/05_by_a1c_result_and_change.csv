@@ -1,0 +1,5 @@
+grp,n,readmit_30,rate_pct,ci95_low,ci95_high
+1. Not tested,57125,5199,9.1,8.87,9.34
+2. Normal,3741,323,8.63,7.78,9.58
+"3. High, medication changed",5473,473,8.64,7.93,9.42
+"4. High, medication not changed",3631,282,7.77,6.94,8.68

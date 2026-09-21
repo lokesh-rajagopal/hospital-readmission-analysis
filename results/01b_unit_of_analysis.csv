@@ -1,0 +1,4 @@
+grp,n,readmit_30,rate_pct,ci95_low,ci95_high
+All encounters (raw),101766,11357,11.16,10.97,11.35
+"All encounters, exclusions removed",99340,11314,11.39,11.19,11.59
+First encounter per patient (primary cohort),69970,6277,8.97,8.76,9.18

@@ -1,0 +1,13 @@
+grp,n,readmit_30,rate_pct,ci95_low,ci95_high
+Discharged to home,44315,3078,6.95,6.71,7.19
+Discharged/transferred to SNF,8784,1176,13.39,12.69,14.12
+Discharged/transferred to home with home health service,8289,789,9.52,8.91,10.17
+Not recorded,2474,251,10.15,9.02,11.4
+Discharged/transferred to another short term hospital,1539,212,13.78,12.14,15.59
+Discharged/transferred to another rehab fac including rehab units of a hospital .,1409,371,26.33,24.1,28.69
+Discharged/transferred to another type of inpatient care institution,913,188,20.59,18.09,23.34
+Not Mapped,778,48,6.17,4.68,8.09
+Discharged/transferred to ICF,541,56,10.35,8.06,13.2
+Left AMA,409,39,9.54,7.05,12.77
+Discharged/transferred to a long term care hospital.,260,8,3.08,1.57,5.95
+Other (< 100 patients each),259,61,23.55,18.79,29.08

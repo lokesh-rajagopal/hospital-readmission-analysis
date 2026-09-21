@@ -1,0 +1,2 @@
+total_encounters,unique_patients,excluded_encounters,n,readmit_30,rate_pct,avg_los_days,ci95_low,ci95_high
+101766,71518,2426,69970,6277,8.97,4.27,8.76,9.18

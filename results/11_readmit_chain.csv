@@ -1,0 +1,3 @@
+grp,n,readmit_30,rate_pct,ci95_low,ci95_high
+Previous stay readmitted <30d,7845,1697,21.63,20.73,22.56
+Previous stay not readmitted <30d,21508,3332,15.49,15.01,15.98

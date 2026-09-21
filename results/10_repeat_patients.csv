@@ -1,0 +1,5 @@
+grp,patients,encounters,pct_of_patients,pct_of_encounters
+1 encounter,53646,53646,76.65,54.0
+2 encounters,10218,20436,14.6,20.57
+3-4 encounters,4587,15115,6.55,15.22
+5+ encounters,1536,10143,2.19,10.21

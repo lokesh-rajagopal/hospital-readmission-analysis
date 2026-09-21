@@ -1,0 +1,11 @@
+grp,n,readmit_30,rate_pct,ci95_low,ci95_high
+Missing,10,2,20.0,5.67,50.98
+Injury,4692,506,10.78,9.93,11.7
+Circulatory,21383,2067,9.67,9.28,10.07
+Diabetes,5748,524,9.12,8.4,9.89
+Neoplasms,2538,230,9.06,8.01,10.24
+Genitourinary,3440,309,8.98,8.07,9.98
+Other,12122,1087,8.97,8.47,9.49
+Musculoskeletal,4064,341,8.39,7.58,9.28
+Digestive,6487,520,8.02,7.38,8.7
+Respiratory,9486,691,7.28,6.78,7.82

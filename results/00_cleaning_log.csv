@@ -1,0 +1,6 @@
+step,action,rows_before,rows_after
+1,Raw encounters loaded,101766,101766
+2,Drop duplicate encounter_id,101766,101766
+3,"Encounters discharged to death or hospice (flagged, excluded from rates)",101766,99343
+4,"Encounters with invalid gender (flagged, excluded from rates)",101766,101763
+5,"Primary cohort: first encounter per patient, after exclusions",101766,69970
