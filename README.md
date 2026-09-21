@@ -235,9 +235,13 @@ and `powerbi/measures.dax` the DAX measures, including a Wilson confidence inter
 DAX. [`powerbi/POWERBI_GUIDE.md`](powerbi/POWERBI_GUIDE.md) walks through building the report
 and **reconciling every headline card against the SQL output** before trusting it.
 
+*Dashboard screenshots are added here once the report is built.*
+
+<!-- Uncomment after saving the screenshots to powerbi/screenshots/:
 | Overview | Clinical drivers | Data quality |
 |---|---|---|
 | ![](powerbi/screenshots/page1_overview.png) | ![](powerbi/screenshots/page2_drivers.png) | ![](powerbi/screenshots/page3_data_quality.png) |
+-->
 
 ---
 
