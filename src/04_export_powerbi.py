@@ -1,4 +1,4 @@
-"""Export a star schema (only the columns the report uses, to keep the file under 10 MB) for Power BI from data/readmission.db into powerbi/data/.
+"""Export a star schema for Power BI from data/readmission.db into powerbi/data/.
 
 fact_encounter holds every encounter with is_index / excluded flags, so the report can show
 both the encounter-level and the patient-level (primary cohort) view from one table.
@@ -15,7 +15,7 @@ OUT = ROOT / "powerbi" / "data"
 FACT_SQL = """
 SELECT e.encounter_id, e.patient_nbr, e.is_index,
        CASE WHEN e.excluded_reason IS NULL THEN 0 ELSE 1 END              AS excluded,
-       e.age_band, e.gender,
+       e.age_band, e.gender, COALESCE(e.race, 'Not recorded')            AS race,
        e.admission_type_id, e.discharge_disposition_id, e.admission_source_id,
        e.time_in_hospital,
        CASE WHEN e.time_in_hospital <= 2 THEN '1-2 days'
@@ -26,9 +26,10 @@ SELECT e.encounter_id, e.patient_nbr, e.is_index,
             WHEN e.time_in_hospital <= 7 THEN 3 ELSE 4 END                   AS los_band_sort,
        e.number_inpatient,
        CASE WHEN e.number_inpatient >= 3 THEN '3+' ELSE CAST(e.number_inpatient AS TEXT) END AS prior_inpatient_band,
-       e.a1c_result, e.a1c_tested, e.med_change, e.diag_group,
+       e.number_emergency, e.number_outpatient, e.num_medications, e.num_lab_procedures,
+       e.number_diagnoses, e.a1c_result, e.a1c_tested, e.med_change, e.diag_group,
        COALESCE(m.status, 'Not prescribed')                               AS insulin_status,
-       e.readmit_30
+       e.readmitted, e.readmit_30
 FROM encounters e
 LEFT JOIN medications m ON m.encounter_id = e.encounter_id AND m.drug = 'insulin'
 """
